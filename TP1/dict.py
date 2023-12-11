@@ -1,5 +1,3 @@
-import string
-
 def loadStopWords():
     file = open("stopwords.txt", "r", encoding="utf-8")
 
@@ -124,21 +122,19 @@ def createFile(fileName: str, listTweet: list):
     
     file.close()
 
-# stopwords = loadStopWords()
 stopwords = []
-links = False
+stopwords = loadStopWords()
+links = True
 caps = False
 hash = False
 at = False
-punc = False
+punc = True
 empty = False
 
 wordDict = {}
 wordDict = initLexique("donnees_tp1/twitter-2013train-A.txt", wordDict)
 wordDict = initLexique("donnees_tp1/twitter-2013dev-A.txt", wordDict)
 wordDict = initLexique("donnees_tp1/twitter-2013test-A.txt", wordDict)
-
-print(len(wordDict))
 
 classificator = createList("donnees_tp1/twitter-2013train-A.txt", wordDict)
 createFile("train", classificator)

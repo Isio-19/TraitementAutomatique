@@ -1,17 +1,20 @@
-Filtering stopwords, links, caps, #, @, punc, empty:    31.9143%
-Filtering stopwords, links, caps, #, @, punc:           31.6888%
-Filtering stopwords, links, caps, #, @,       empty:    31.9143%
-Filtering stopwords, links, caps, #,    punc, empty:    33.2957%
-Filtering stopwords, links, caps,    @, punc, empty:    30.0818%
-Filtering stopwords, links,       #, @, punc, empty:    37.0172%
-Filtering stopwords,        caps, #, @, punc, empty:    31.6042%
-Filtering            links, caps, #, @, punc, empty:    31.9425%
-    
-Filtering stopwords:                                    37.8066%
-Filtering links:                                        35.1001%
-Filtering caps:                                         32.8729%
-Filtering hash:                                         35.2692%
-Filtering at:                                           35.6921%
-Filtering punc:                                         35.1283%
-Filtering empty:                                        34.2825%
-Filtering nothing:                                      35.1283%
+Filtering stopwords, links, caps, #, @, punc, empty:    61.0093%
+Filtering stopwords, links, caps, #, @, punc:           60.7274%
+Filtering stopwords, links, caps, #, @,       empty:    61.2067%
+Filtering stopwords, links, caps, #,    punc, empty:    61.263%
+Filtering stopwords, links, caps,    @, punc, empty:    61.404%
+Filtering stopwords, links,       #, @, punc, empty:    60.7556%
+Filtering stopwords,        caps, #, @, punc, empty:    61.3758%
+Filtering            links, caps, #, @, punc, empty:    61.0093%
+
+Filtering stopwords:                                    61.2912%
+Filtering links:                                        61.263%
+Filtering caps:                                         62.2216%
+Filtering hash:                                         61.0939%
+Filtering at:                                           60.8965%
+Filtering punc:                                         61.5168%
+Filtering empty:                                        61.2067%
+
+Filtering nothing:                                      61.2912%
+
+Filtering stopwords and punc:                           61.5168%
