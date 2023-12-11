@@ -28,7 +28,6 @@ def initList(content, lexique, indexList, occurrenceList, caps, stopword, links,
         stopwords = loadStopwords()
     
     for word in content:
-        print(word)
         # uncaps the words        
         if caps:
             word = word.lower()
@@ -86,10 +85,54 @@ def loadStopwords():
     
     return list
 
-def createClassificator(filePath, stopword, links, caps, hash, at, punc, empty):
+def buildLexique(filePath, lexique, caps, stopword, links, hash, at, punc, empty):
     file = open(filePath, "r")
 
-    lexique = []
+    if stopword:
+        stopwords = loadStopwords()
+
+    for line in file:
+        content = line.split('\t')[2].split(" ")
+     
+        for word in content:
+            word = word.replace(" ", "")
+
+            # filters
+            if caps: 
+                word = word.lower()
+
+            if stopword:
+                if word in stopwords:
+                    continue
+
+            if links:
+                if word.startswith("http"):
+                    continue
+
+            if hash:
+                if word.startswith("#"):
+                    continue
+
+            if at:
+                if word.startswith("@"):
+                    continue
+
+            if punc:
+                word = word.replace(string.punctuation, "")
+            
+            if empty:
+                if len(word) == 0:  
+                    continue
+    
+            lexique, _ = addWord(lexique, word)
+    
+    file.close()
+
+    return lexique
+
+def createClassificator(filePath, lexique, stopword, links, caps, hash, at, punc, empty):
+    file = open(filePath, "r")
+
     tweetList = []
 
     for line in file:
@@ -103,7 +146,7 @@ def createClassificator(filePath, stopword, links, caps, hash, at, punc, empty):
         occurrenceList = []
 
         # initialise indexList and occurrenceList
-        lexique, indexList, occurrenceList = initList(content, lexique, indexList, occurrenceList, stopword, links, caps, hash, at, punc, empty)
+        lexique, indexList, occurrenceList = initList(content, indexList, occurrenceList, stopword, links, caps, hash, at, punc, empty)
 
         # build the tweet line to add to the file
         while len(indexList) != 0:
@@ -132,18 +175,23 @@ def createFile(fileName, list):
     file.close()
 
 caps=False
-stopword=False
+stopword=True
 links=False
 hash=False
 at=False
 punc=False
 empty=False
 
-list = createClassificator("donnees_tp1/twitter-2013train-A.txt", caps, stopword, links, hash, at, punc, empty)
-createFile("train", list)
+wordList = []
+wordList = buildLexique("donnees_tp1/twitter-2013train-A.txt", wordList)
+wordList = buildLexique("donnees_tp1/twitter-2013dev-A.txt", wordList)
+wordList = buildLexique("donnees_tp1/twitter-2013test-A.txt", wordList)
+print(len(wordList))
+# createClassificator("donnees_tp1/twitter-2013train-A.txt", wordList, caps, stopword, links, hash, at, punc, empty)
+# createFile("train", list)
 
-list = createClassificator("donnees_tp1/twitter-2013dev-A.txt", caps, stopword, links, hash, at, punc, empty)
-createFile("dev", list)
+# list = createClassificator("donnees_tp1/twitter-2013dev-A.txt", caps, stopword, links, hash, at, punc, empty)
+# createFile("dev", list)
 
-list = createClassificator("donnees_tp1/twitter-2013test-A.txt", caps, stopword, links, hash, at, punc, empty)
-createFile("test", list)
+# list = createClassificator("donnees_tp1/twitter-2013test-A.txt", caps, stopword, links, hash, at, punc, empty)
+# createFile("test", list)
