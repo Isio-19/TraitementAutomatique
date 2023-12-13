@@ -1,5 +1,5 @@
 def loadStopWords():
-    file = open("stopwords.txt", "r", encoding="utf-8")
+    file = open("donnees_tp1/stopwords.txt", "r", encoding="utf-8")
 
     stopwords = [] 
     for word in file:
