@@ -1,15 +1,15 @@
 import torch
 import numpy 
 
-class NeuralNetwork(nn.Module):
-    def __init__(self):
+class NeuralNetwork(torch.nn.Module):
+    def __init__(self, dictSize):
         super(NeuralNetwork, self).__init__()
-        self.linear1 = nn.Linear(784, 512)
-        self.relu1 = nn.ReLU()
-        self.linear2 = nn.Linear(512, 512)
-        self.relu2 = nn.ReLU()
-        self.linear3 = nn.Linear(512, 10)
-        self.softmax = nn.Softmax(dim=1)
+        self.linear1 = torch.nn.Linear(dictSize, 512)
+        self.relu1 = torch.nn.ReLU()
+        self.linear2 = torch.nn.Linear(512, 512)
+        self.relu2 = torch.nn.ReLU()
+        self.linear3 = torch.nn.Linear(512, 3)
+        self.softmax = torch.nn.Softmax(dim=1)
 
     def forward(self, x):
         x = self.linear1(x)
@@ -20,6 +20,62 @@ class NeuralNetwork(nn.Module):
         x = self.softmax(x)
 
         return x
+
+class SVMDataset(torch.utils.data.Dataset):
+    def __init__(self, svmFile, sizeDict):
+        self.svmFile = svmFile
+
+        # list of tensor 
+        self.data = []
+
+        # list of int 
+        self.sentiment = []
+
+        file = open(self.svmFile)
+        for line in file:
+            line = line.replace("\n", "")
+            content = line.split(" ")
+
+            self.sentiment.append(float(content[0]))
+            del content[0]
+
+            tweetTensor = torch.zeros(sizeDict)
+
+            for wordAndOccurrence in content: 
+                temp = wordAndOccurrence.split(":")
+                # correspond to the word id, -1 because it starts at 1
+                tweetTensor[int(temp[0])-1] = int(temp[1])
+
+            self.data.append(tweetTensor)
+
+        file.close()
+
+        self.sentiment = torch.from_numpy(numpy.array(self.sentiment)).to(torch.float32)
+        # print(self.sentiment)
+        # print(self.data)
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, idx):
+        return self.sentiment[idx], self.data[idx]
+
+def train_loop(dataloader, model, loss_fn, optimizer):
+    for batch, (X, y) in enumerate(dataloader):
+        # Compute prediction and loss
+        print(X.tolist())
+
+        pred = model(X)
+        loss = loss_fn(pred, y)
+
+        # Backpropagation
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+        
+        if batch % 100 == 0:
+            loss, current = loss.item(), batch * len(X)
+            print(f"loss: {loss:>7f} [{current:>5d}/{size:>5d}]")
 
 def loadStopWords():
     file = open("donnees_tp1/stopwords.txt", "r", encoding="utf-8")
@@ -161,7 +217,21 @@ wordDict = initLexique("donnees_tp1/twitter-2013test-A.txt", wordDict)
 
 classificator = createList("donnees_tp1/twitter-2013train-A.txt", wordDict)
 createFile("train", classificator)
-classificator = createList("donnees_tp1/twitter-2013dev-A.txt", wordDict)
+# classificator = createList("donnees_tp1/twitter-2013dev-A.txt", wordDict)
 createFile("dev", classificator)
-classificator = createList("donnees_tp1/twitter-2013test-A.txt", wordDict)
+# classificator = createList("donnees_tp1/twitter-2013test-A.txt", wordDict)
 createFile("test", classificator)
+
+# svm = SVMDataset("svm/aaugh.svm", 6)
+
+print(len(wordDict))
+
+svm = SVMDataset("svm/train.svm", len(wordDict))
+dataloader = torch.utils.data.DataLoader(svm, batch_size=64)
+model = NeuralNetwork(len(wordDict))
+loss_fn = torch.nn.CrossEntropyLoss()
+optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
+
+train_loop(dataloader, model, loss_fn, optimizer)
+
+# faire en sorte que les svm de dev et test soient écrits avec les mots de train
