@@ -1,7 +1,70 @@
 
 # TP1
 
+## Création du dictionnaire
+
+J'ouvre chaque fichier à la suite (twitter-2013train-A.txt, twitter-2013dev-A.txt et twitter-2013test-A.txt).
+Pour chaque ligne de chaque fichier, je vais:
+- Trouver les mots de chaque ligne avec le séparateur " "
+- Filtrer et transformer mes mots selon mes filtres (stopwords, présence de liens, de majuscules, des hashtag ou de mentions, la ponctuation)
+
+Pour chaque mot:
+- Si le mot n'est pas dans mon dictionnaire, je l'y ajoute
+- J'associe un ID à ce mot
+
+## Création du svm
+
+Une fois que j'ai mon dictionnaire de mots, je vais créer mes SVM pour chaque fichier.
+J'ouvre chacun de mes fichiers et pour chaque ligne (tweet) du fichier ouvert, je vais:
+- Ajouter à une string le sentiment du tweet;
+- Compter le nombre de fois chaque mots uniques apparaissent dans la ligne;
+- Dans l'ordre des ID des mots, ajouter l'ID du mots suivi par le nombre de fois qu'il apparait dans la ligne.
+- Ajouter cette string dans une liste de string
+
+Une fois que j'ai traité toutes les lignes d'un fichier, je récupère cette liste de string et je créer un fichier svm qui correspond à cette liste (au fichier).
+
+<div style="page-break-after: always;"></div>
+
+## Test 
+
+Après avoir créer mes fichiers SVM, j'ai entrainé un modèle sur train.svm et je l'ai testé sur test.svm.
+Après avoir testé plusieurs combinaisons de filtres (non exhaustives), voici les résultats de précisions de prédictions de sentiments des tweets:
+
+> Filtering stopwords, links, caps, #, @, punc, empty:    61.0093% <br>
+> Filtering stopwords, links, caps, #, @, punc:           60.7274% <br>
+> Filtering stopwords, links, caps, #, @,       empty:    61.2067% <br>
+> Filtering stopwords, links, caps, #,    punc, empty:    61.263%  <br>
+> Filtering stopwords, links, caps,    @, punc, empty:    61.404%  <br>
+> Filtering stopwords, links,       #, @, punc, empty:    60.7556% <br>
+> Filtering stopwords,        caps, #, @, punc, empty:    61.3758% <br>
+> Filtering            links, caps, #, @, punc, empty:    61.0093% <br>
+> ---------------------------------------------------------------- <br>
+> Filtering stopwords:                                    61.2912% <br>
+> Filtering links:                                        61.263%  <br>
+> Filtering caps:                                         62.2216% <br>
+> Filtering hash:                                         61.0939% <br>
+> Filtering at:                                           60.8965% <br>
+> Filtering punc:                                         61.5168% <br>
+> Filtering empty:                                        61.2067% <br>
+> Filtering nothing:                                      61.2912% <br>
+> ---------------------------------------------------------------- <br>
+> Filtering stopwords and punc:                           61.5168% <br>
+
+Dans mes tests de combinaisons, il semble que la combinaison de filtres qui donne la plus grande précision de prédiction de tweet est lorsque nous filtrons seulement les lettres majuscules (transformation des lettres majuscules en miniscules).
+
+## Améliorations possibles
+
+N'ayant pas utiliser le fichier dev.svm, il est possible que j'obtienne de meilleurs résultats en changeant les méta-paramètres de mon modèle.
+
+<div style="page-break-after: always;"></div>
+
 # TP2
+
+Je reprends le programme python de j'ai créer dans le TP1 et j'y ajoute un réseau de neuronnes.
+Je change aussi légèrement mes fonctions:
+
+
+<div style="page-break-after: always;"></div>
 
 # TP3
 
