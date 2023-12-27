@@ -19,6 +19,7 @@ def init():
         vectors.update({word : vector})
     return vectors
 
+#4 - Fonction qui permet de calculer la similarité cosine de deux mots 
 def cosineSimilarity(word1, word2, vectors):
     firstVector = np.array(vectors.get(word1))
     secondVector = np.array(vectors.get(word2))
