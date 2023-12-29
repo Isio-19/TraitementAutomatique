@@ -1,26 +1,25 @@
 import torch
 import numpy 
 
+device = ("cuda")
+
 class NeuralNetwork(torch.nn.Module):
     def __init__(self, dictSize):
         super(NeuralNetwork, self).__init__()
         self.linear1 = torch.nn.Linear(dictSize, 512)
         self.relu1 = torch.nn.ReLU()
-        self.linear2 = torch.nn.Linear(512, 512)
-        self.relu2 = torch.nn.ReLU()
         self.linear3 = torch.nn.Linear(512, 3)
         self.softmax = torch.nn.Softmax(dim=1)
+        self.double()
 
     def forward(self, x):
         x = self.linear1(x)
         x = self.relu1(x)
-        x = self.linear2(x)
-        x = self.relu2(x)
         x = self.linear3(x)
         x = self.softmax(x)
 
         return x
-
+    
 class SVMDataset(torch.utils.data.Dataset):
     def __init__(self, svmFile, sizeDict):
         self.svmFile = svmFile
@@ -36,35 +35,34 @@ class SVMDataset(torch.utils.data.Dataset):
             line = line.replace("\n", "")
             content = line.split(" ")
 
-            self.sentiment.append(float(content[0]))
+            self.sentiment.append(int(content[0]))
             del content[0]
 
-            tweetTensor = torch.zeros(sizeDict)
+            tweetTensor = numpy.zeros(sizeDict)
 
             for wordAndOccurrence in content: 
                 temp = wordAndOccurrence.split(":")
                 # correspond to the word id, -1 because it starts at 1
                 tweetTensor[int(temp[0])-1] = int(temp[1])
 
-            self.data.append(tweetTensor)
+            self.data.append(torch.from_numpy(tweetTensor).to(device))
 
         file.close()
 
-        self.sentiment = torch.from_numpy(numpy.array(self.sentiment)).to(torch.float32)
-        # print(self.sentiment)
-        # print(self.data)
+        self.sentiment = torch.from_numpy(numpy.array(self.sentiment)).to(device)
 
     def __len__(self):
         return len(self.data)
 
     def __getitem__(self, idx):
-        return self.sentiment[idx], self.data[idx]
+        return self.data[idx], self.sentiment[idx]
 
 def train_loop(dataloader, model, loss_fn, optimizer):
     for batch, (X, y) in enumerate(dataloader):
+        # rajout
+        X, y = X.to(device), y.to(device)
+        
         # Compute prediction and loss
-        print(X.tolist())
-
         pred = model(X)
         loss = loss_fn(pred, y)
 
@@ -72,13 +70,26 @@ def train_loop(dataloader, model, loss_fn, optimizer):
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
-        
-        if batch % 100 == 0:
-            loss, current = loss.item(), batch * len(X)
-            print(f"loss: {loss:>7f} [{current:>5d}/{size:>5d}]")
+
+def test_model(dataloader, model):
+    errorRate = 0
+    numberLine = 0
+
+    for batch, (X, y) in enumerate(dataloader):
+        predictedY = model(X)
+
+        for i in range(len(X)):
+            numberLine += 1
+
+            predictedLabel = numpy.argmax(predictedY[i].tolist())
+            if predictedLabel != y[i]:
+                errorRate += 1
+
+    print(f'Error rate of the model: {(errorRate/numberLine)*100}%')
+
 
 def loadStopWords():
-    file = open("donnees_tp1/stopwords.txt", "r", encoding="utf-8")
+    file = open("donnees_tp2/stopwords.txt", "r", encoding="utf-8")
 
     stopwords = [] 
     for word in file:
@@ -176,6 +187,10 @@ def createList(fileName: str, wordDict: dict):
             if not(wordFilter(word, stopwords, links, hash, at, empty)):
                 continue
             
+            # ignore the words that are not in the training set
+            if word not in wordDict:
+                continue
+
             if wordDict[word] not in indexToOccurrenceDict:
                 indexToOccurrenceDict.update({wordDict[word] : 1})
             else:
@@ -203,35 +218,29 @@ def createFile(fileName: str, listTweet: list):
 
 stopwords = []
 stopwords = loadStopWords()
-links = True
-caps = False
+links = False
+caps = True
 hash = False
 at = False
-punc = True
+punc = False
 empty = False
 
 wordDict = {}
-wordDict = initLexique("donnees_tp1/twitter-2013train-A.txt", wordDict)
-wordDict = initLexique("donnees_tp1/twitter-2013dev-A.txt", wordDict)
-wordDict = initLexique("donnees_tp1/twitter-2013test-A.txt", wordDict)
+wordDict = initLexique("donnees_tp2/twitter-2013train-A.txt", wordDict)
 
-classificator = createList("donnees_tp1/twitter-2013train-A.txt", wordDict)
-createFile("train", classificator)
-# classificator = createList("donnees_tp1/twitter-2013dev-A.txt", wordDict)
-createFile("dev", classificator)
-# classificator = createList("donnees_tp1/twitter-2013test-A.txt", wordDict)
-createFile("test", classificator)
-
-# svm = SVMDataset("svm/aaugh.svm", 6)
-
-print(len(wordDict))
+createFile("train", createList("donnees_tp2/twitter-2013train-A.txt", wordDict))
+# createFile("dev", createList("donnees_tp2/twitter-2013dev-A.txt", wordDict))
+createFile("test", createList("donnees_tp2/twitter-2013test-A.txt", wordDict))
 
 svm = SVMDataset("svm/train.svm", len(wordDict))
-dataloader = torch.utils.data.DataLoader(svm, batch_size=64)
-model = NeuralNetwork(len(wordDict))
+dataloader = torch.utils.data.DataLoader(svm, batch_size=4)
+model = NeuralNetwork(len(wordDict)).to(device)
 loss_fn = torch.nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
 
 train_loop(dataloader, model, loss_fn, optimizer)
 
-# faire en sorte que les svm de dev et test soient écrits avec les mots de train
+svm = SVMDataset("svm/test.svm", len(wordDict))
+dataloader = torch.utils.data.DataLoader(svm, batch_size=4)
+
+test_model(dataloader, model)

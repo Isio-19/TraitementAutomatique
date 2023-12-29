@@ -60,8 +60,10 @@ N'ayant pas utiliser le fichier dev.svm, il est possible que j'obtienne de meill
 
 # TP2
 
-Je reprends le programme python de j'ai créer dans le TP1 et j'y ajoute un réseau de neuronnes.
-Je change aussi légèrement mes fonctions:
+Après avoir repris mon programme python du TP1, j'y rajoute un réseaux de neurones et une classe pour qui a pour objectif de créer une lsite de tensor qui aura une structure similaire à la liste de tweet du TP1.
+J'ai aussi modifier quelques unes de mes fonctions: 
+- Lorsque je créer les fichiers SVM, puisque nous utilisons seulement le fichier twitter-2013train-A.txt pour créer le dictionnaire, si un mot apparait dans un autre fichier mais pas dans le dictionnaire, on saute ce mot;
+
 
 
 <div style="page-break-after: always;"></div>

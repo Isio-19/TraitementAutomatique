@@ -124,11 +124,11 @@ def createFile(fileName: str, listTweet: list):
 
 stopwords = []
 stopwords = loadStopWords()
-links = True
+links = False
 caps = False
 hash = False
 at = False
-punc = True
+punc = False
 empty = False
 
 wordDict = {}
