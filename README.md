@@ -108,45 +108,14 @@ Parmis les combinaisons de couches et de nombre de neurones que j'ai entrainé, 
 
 Matrice de confusion pour un modèle avec une couche cachée de 1024 neuronnes:
 
-
-<table>
-
-        <thead>
-        
-                <tr>
-                
-                        <td> </td>
-                        <th colspan="3"> Classes réelles </th>
-
-                </tr>
-
-        </thead>
-
-        <tr>
-
-                <th rowspaw="3"> Classes prédites </th>
-                <td> </td>
-                <td> </td>
-                <td> </td>
-        </tr>
-
-        <tr>
-
-                <td> </td>
-                <td> </td>
-                <td> </td>
-
-        </tr>
-
-        <tr>
-        
-                <td> </td>
-                <td> </td>
-                <td> </td>
-
-        </tr>
-
-</table>
+|                  | Classes réelles | <               | <             | <             | <     |
+|------------------/-----------------/-----------------/---------------/---------------/-------|
+| Classes prédites /                 /   Neutre ( 0 )  / Positif ( 1 ) / Négatif ( 2 ) / Total |
+| ^                |   Neutre ( 0 )  /                 |               |               |       |
+| ^                |  Positif ( 1 )  /                 |               |               |       |
+| ^                |  Négatif ( 2 )  /                 |               |               |       |
+| ^                |      Total      /                 |               |               |       |
+|------------------/-----------------/-----------------/---------------/---------------/-------|
 
 <div style="page-break-after: always;"></div>
 
