@@ -109,7 +109,6 @@ Parmis les combinaisons de couches et de nombre de neurones que j'ai entrainé, 
 Matrice de confusion pour un modèle avec une couche cachée de 1024 neuronnes:
 
 |                  | Classes réelles | <               | <             | <             | <     |
-|------------------/-----------------/-----------------/---------------/---------------/-------|
 | Classes prédites /                 /   Neutre ( 0 )  / Positif ( 1 ) / Négatif ( 2 ) / Total |
 | ^                |   Neutre ( 0 )  /                 |               |               |       |
 | ^                |  Positif ( 1 )  /                 |               |               |       |
@@ -118,40 +117,47 @@ Matrice de confusion pour un modèle avec une couche cachée de 1024 neuronnes:
 |------------------/-----------------/-----------------/---------------/---------------/-------|
 
 <table>
-  <tr>
-    <td>One</td>
-    <td>Two</td>
-  </tr>
-  <tr>
-    <td colspan="2">Three</td>
-  </tr>
+    <tr>
+        <td></td>
+        <td colspan = "5">Classes réelles</td>
+    </tr>
+    <tr>
+        <td rowspan = "5">Classes prédites</td>
+        <td></td>
+        <td>Neutre (0)</td>
+        <td>Positif (1)</td>
+        <td>Négatif (2)</td>
+        <td>Total</td>
+    </tr>
+    <tr>
+        <td>Neutre (0)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Positif (1)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Négatif (2)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Total</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
 </table>
-
-| Caption Text |                 |                |                |                |                |
-|--------------|-----------------|----------------|----------------|----------------|----------------|
-|              | Header 1        | Header 2       |        <       | Header 3       |        <       |
-|              | Subheader 1     | Subheader 2.1  | Subheader 2.2  | Subheader 3.1  | Subheader 3.2  |
-|==============|-----------------|----------------|----------------|----------------|----------------|
-| Row Header 1 | 3row, 3col span |       <        |        <       | Colspan only   |        <       |
-| Row Header 2 |       ^         |       <        |        <       | Rowspan only   | Cell           |
-| Row Header 3 |       ^         |       <        |        <       |       ^        | Cell           |
-| Row Header 4 |  Row            |  Each cell     |:   Centered   :| Right-aligned :|: Left-aligned  |
-|.            .|. with multiple .|. has room for .|.  multi-line  .|.   multi-line .|. multi-line   .|
-|.            .|. lines.        .|. more text.   .|.     text.    .|.        text. .|. text.        .|
-
-|==============|                 |                |                |                |                |
-|--------------|-----------------|----------------|----------------|----------------|----------------|
-|              | Header 1        | Header 2       |        <       | Header 3       |        <       |
-|              | Subheader 1     | Subheader 2.1  | Subheader 2.2  | Subheader 3.1  | Subheader 3.2  |
-|==============|=================|================|================|================|================|
-| Row Header 1 | 3row, 3col span |       <        |        <       | Colspan only   |        <       |
-| Row Header 2 |       ^         |       <        |        <       | Rowspan only   | Cell           |
-| Row Header 3 |       ^         |       <        |        <       |       ^        | Cell           |
-| Row Header 4 |  Row            |  Each cell     |:   Centered   :| Right-aligned :|: Left-aligned  |
-|.            .|. with multiple .|. has room for .|.  multi-line  .|.   multi-line .|. multi-line   .|
-|.            .|. lines.        .|. more text.   .|.     text.    .|.        text. .|. text.        .|
-|--------------|-----------------|----------------|----------------|----------------|----------------|
-| Caption Text |
 
 <div style="page-break-after: always;"></div>
 
