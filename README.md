@@ -72,35 +72,107 @@ Une fois le modèle appris, j'ai créer une fonction qui vérifie les labels pr�
 
 Pour chacun des tests, j'ai entrainer le modèle puis tester le modèle et je répète cela 4 fois de plus (5 en total).
 
-Avec les paramètres par défaut (2 couches cachées et 512 neuronnes par couches cachées), j'obtiens une précision d'environ 72.54%
-Avec 256 neurones sur la première couche cachée, j'obtiens une précision d'environ 70.06%
-Avec 256 neurones sur la deuxième couche cachée, j'obtiens une précision d'environ 72.85%
-Avec 256 neurones sur les deux couches cachées, j'obtiens une précision d'environ 71.89%
-Avec 1024 neurones sur la première couche cachée, j'obtiens une précision d'environ 72.06%
-Avec 1024 neurones sur la deuxième couche cachée, j'obtiens une précision d'environ 70.82%
-Avec 1024 neurones sur les deux couches cachées, j'obtiens une précision d'environ 72.37%
+Précisions des modèles avec 1 couches cachées:
 
-Avec une seule couche cachée de 256 neuronnes, j'obtiens une précision d'environ 73.56%
-Avec une seule couche cachée de 512 neuronnes, j'obtiens une précision d'environ 73.50%
-Avec une seule couche cachée de 1024 neuronnes, j'obtiens une précision d'environ 73.67%
-Avec une seule couche cachée de 2048 neuronnes, j'obtiens une précision d'environ 73.08%
+<table>
+    <tr>
+        <td> Couche cachée n°1 </td><td> Précision </td>
+    </tr>
+    <tr>
+        <td> 256 </td><td> 73.56%</td>
+    </tr>
+    <tr>
+        <td> 512 </td><td> 73.50% </td>
+    </tr>
+    <tr>
+        <td> 1024 </td><td> 73.67% </td>
+    </tr>
+    <tr>
+        <td> 2048 </td><td> 73.08% </td>
+    </tr>
+</table>
 
-Avec trois couches cachée de 512 neuronnes, j'obtiens une précision d'environ 67.80%
-Avec 1024 neurones sur la première couche cachée, j'obtiens une précision d'environ 62.93%
-Avec 1024 neurones sur la deuxième couche cachée, j'obtiens une précision d'environ 67.83%
-Avec 1024 neurones sur la troisième couche cachée, j'obtiens une précision d'environ 67.32%
-Avec 1024 neurones sur la première et deuxième couches cachées, j'obtiens une précision d'environ 67.24%
-Avec 1024 neurones sur la première et troisième couches cachées, j'obtiens une précision d'environ 64.11%
-Avec 1024 neurones sur la deuxième et troisième couches cachées, j'obtiens une précision d'environ 70.34%
-Avec 1024 neurones sur les trois couches cachées, j'obtiens une précision d'environ 70.31%
+Précisions des modèles avec 2 couches cachées:
 
-Avec 256 neurones sur la première couche cachée, j'obtiens une précision d'environ 66.82%
-Avec 256 neurones sur la deuxième couche cachée, j'obtiens une précision d'environ 69.55%
-Avec 256 neurones sur la troisième couche cachée, j'obtiens une précision d'environ 68.90%
-Avec 256 neurones sur la première et deuxième couches cachées, j'obtiens une précision d'environ 68.93%
-Avec 256 neurones sur la première et troisième couches cachées, j'obtiens une précision d'environ 70.20%
-Avec 256 neurones sur la deuxième et troisième couches cachées, j'obtiens une précision d'environ 69.75%
-Avec 256 neurones sur les trois couches cachées, j'obtiens une précision d'environ 68.31%
+<table>
+    <tr>
+        <td> Couche cachée n°1 </td><td> Couche cachée n°2 </td><td> Précision </td>
+    </tr>
+    <tr>
+        <td> 512 </td><td> 512 </td><td> 72.54% </td>
+    </tr>
+    <tr>
+        <td> 256 </td><td> 512 </td><td> 70.06% </td>
+    </tr>
+    <tr>
+        <td> 512 </td><td> 256 </td><td> 72.85% </td>
+    </tr>
+    <tr>
+        <td> 256 </td><td> 256 </td><td> 71.89% </td>
+    </tr>
+    <tr>
+        <td> 1024 </td><td> 512 </td><td> 72.06% </td>
+    </tr>
+    <tr>
+        <td> 512 </td><td> 1024 </td><td> 70.82% </td>
+    </tr>
+    <tr>
+        <td> 1024 </td><td> 1024 </td><td> 72.37% </td>
+    </tr>
+</table>
+
+Précisions des modèles avec 3 couches cachées: 
+
+<table>
+    <tr>
+        <td> Couche cachée n°1 </td><td> Couche cachée n°2 </td>><td> Couche cachée n°3 </td><td> Précision </td>
+    </tr>
+    <tr>
+        <td> 512 </td><td> 512 </td><td> 512 </td><td> 67.80% </td>
+    </tr>
+    <tr>
+        <td> 1024 </td><td> 512 </td><td> 512 </td><td> 62.93% </td>
+    </tr>
+    <tr>
+        <td> 512 </td><td> 1024 </td><td> 512 </td><td> 67.83% </td>
+    </tr>
+    <tr>
+        <td> 512 </td><td> 512 </td><td> 1024 </td><td> 67.32% </td>
+    </tr>
+    <tr>
+        <td> 1024 </td><td> 1024 </td><td> 512 </td><td> 67.24% </td>
+    </tr>
+    <tr>
+        <td> 1024 </td><td> 512 </td><td> 1024 </td><td> 64.11% </td>
+    </tr>
+    <tr>
+        <td> 512 </td><td> 1024 </td><td> 1024 </td><td> 70.34% </td>
+    </tr>
+    <tr>
+        <td> 1024 </td><td> 1024 </td><td> 1024 </td><td> 70.31% </td>
+    </tr>
+    <tr>
+        <td> 256 </td><td> 512 </td><td> 512 </td><td> 66.82% </td>
+    </tr>
+    <tr>
+        <td> 512 </td><td> 256 </td><td> 512 </td><td> 69.55% </td>
+    </tr>
+    <tr>
+        <td> 512 </td><td> 512 </td><td> 256 </td><td> 68.90% </td>
+    </tr>
+    <tr>
+        <td> 256 </td><td> 256 </td><td> 512 </td><td> 68.93% </td>
+    </tr>
+    <tr>
+        <td> 256 </td><td> 512 </td><td> 256 </td><td> 70.20% </td>
+    </tr>
+    <tr>
+        <td> 512 </td><td> 256 </td><td> 256 </td><td> 69.75% </td>
+    </tr>
+    <tr>
+        <td> 256 </td><td> 256 </td><td> 256 </td><td> 68.31% </td>
+    </tr>
+</table>
 
 Parmis les combinaisons de couches et de nombre de neurones que j'ai entrainé, une seule couche cachée avec 1024 neurones semble donner les meilleurs résultats.
 
@@ -108,18 +180,10 @@ Parmis les combinaisons de couches et de nombre de neurones que j'ai entrainé, 
 
 Matrice de confusion pour un modèle avec une couche cachée de 1024 neuronnes:
 
-|                  | Classes réelles | <               | <             | <             | <              |
-| Classes prédites /                 /   Neutre ( 0 )  / Positif ( 1 ) / Négatif ( 2 ) / Total          |
-| ^                |   Neutre ( 0 )  / 1425            | 304           | 363           | 2092 (58.98%)  |
-| ^                |  Positif ( 1 )  / 88              | 1171          | 196           | 1455 (41.02%)  |
-| ^                |  Négatif ( 2 )  / 0               | 0             | 0             | 0    (0.00%)   |
-| ^                |      Total      / 1513 (42.66%)   | 1475 (41.58%) | 559 (15.76%)  | 3547 (100.00%) |
-|------------------/-----------------/-----------------/---------------/---------------/----------------|
-
 <table>
     <tr>
         <td></td>
-        <td colspan="5" style="text-align: center;">Classes réelles</td>
+        <td colspan="5">Classes réelles</td>
     </tr>
     <tr>
         <td rowspan="5">Classes prédites</td>
@@ -155,7 +219,7 @@ Matrice de confusion pour un modèle avec une couche cachée de 1024 neuronnes:
         <td> 1513 (42.66%) </td>
         <td> 1475 (41.58%) </td>
         <td> 559 (15.76%) </td>
-        <td> 3547 (100.00%)</td>
+        <td> 3547 (100.00%) </td>
     </tr>
 </table>
 
