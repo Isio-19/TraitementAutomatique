@@ -6,15 +6,19 @@ device = ("cuda")
 class NeuralNetwork(torch.nn.Module):
     def __init__(self, dictSize):
         super(NeuralNetwork, self).__init__()
-        self.linear1 = torch.nn.Linear(dictSize, 512)
+        self.linear1 = torch.nn.Linear(dictSize, 256)
         self.relu1 = torch.nn.ReLU()
-        self.linear3 = torch.nn.Linear(512, 3)
+        self.linear2 = torch.nn.Linear(256, 256)
+        self.relu2 = torch.nn.ReLU()
+        self.linear3 = torch.nn.Linear(256, 3)
         self.softmax = torch.nn.Softmax(dim=1)
         self.double()
 
     def forward(self, x):
         x = self.linear1(x)
         x = self.relu1(x)
+        x = self.linear2(x)
+        x = self.relu2(x)
         x = self.linear3(x)
         x = self.softmax(x)
 
@@ -85,7 +89,10 @@ def test_model(dataloader, model):
             if predictedLabel != y[i]:
                 errorRate += 1
 
-    print(f'Error rate of the model: {(errorRate/numberLine)*100}%')
+    precision = 100 - (errorRate/numberLine)*100
+
+    print(f'Prediction rate of the model: {precision}%')
+    return precision
 
 
 def loadStopWords():
@@ -219,7 +226,7 @@ def createFile(fileName: str, listTweet: list):
 stopwords = []
 stopwords = loadStopWords()
 links = False
-caps = True
+caps = False
 hash = False
 at = False
 punc = False
@@ -232,15 +239,18 @@ createFile("train", createList("donnees_tp2/twitter-2013train-A.txt", wordDict))
 # createFile("dev", createList("donnees_tp2/twitter-2013dev-A.txt", wordDict))
 createFile("test", createList("donnees_tp2/twitter-2013test-A.txt", wordDict))
 
+averagePrecision = 0
+
 svm = SVMDataset("svm/train.svm", len(wordDict))
 dataloader = torch.utils.data.DataLoader(svm, batch_size=4)
 model = NeuralNetwork(len(wordDict)).to(device)
 loss_fn = torch.nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
 
-train_loop(dataloader, model, loss_fn, optimizer)
+for i in range(5):
+    train_loop(dataloader, model, loss_fn, optimizer)
 
-svm = SVMDataset("svm/test.svm", len(wordDict))
-dataloader = torch.utils.data.DataLoader(svm, batch_size=4)
+    svm = SVMDataset("svm/test.svm", len(wordDict))
+    dataloader = torch.utils.data.DataLoader(svm, batch_size=4)
 
-test_model(dataloader, model)
+    test_model(dataloader, model)

@@ -60,11 +60,93 @@ N'ayant pas utiliser le fichier dev.svm, il est possible que j'obtienne de meill
 
 # TP2
 
-Après avoir repris mon programme python du TP1, j'y rajoute un réseaux de neurones et une classe pour qui a pour objectif de créer une lsite de tensor qui aura une structure similaire à la liste de tweet du TP1.
+## Codage et apprentissage du modèle
+
+Après avoir repris mon programme python du TP1, j'y rajoute un réseaux de neurones et une classe pour qui a pour objectif de créer une liste de tensor qui aura une structure similaire à la liste de tweet du TP1.
 J'ai aussi modifier quelques unes de mes fonctions: 
-- Lorsque je créer les fichiers SVM, puisque nous utilisons seulement le fichier twitter-2013train-A.txt pour créer le dictionnaire, si un mot apparait dans un autre fichier mais pas dans le dictionnaire, on saute ce mot;
+- Lorsque je créer les fichiers SVM, puisque nous utilisons seulement le fichier twitter-2013train-A.txt pour créer le dictionnaire, si un mot apparait dans un autre fichier mais pas dans le dictionnaire, on saute ce mot.
+
+## Test du modèle
+
+Une fois le modèle appris, j'ai créer une fonction qui vérifie les labels prédis avec les labels réels.
+
+Pour chacun des tests, j'ai entrainer le modèle puis tester le modèle et je répète cela 4 fois de plus (5 en total).
+
+Avec les paramètres par défaut (2 couches cachées et 512 neuronnes par couches cachées), j'obtiens une précision d'environ 72.54%
+Avec 256 neurones sur la première couche cachée, j'obtiens une précision d'environ 70.06%
+Avec 256 neurones sur la deuxième couche cachée, j'obtiens une précision d'environ 72.85%
+Avec 256 neurones sur les deux couches cachées, j'obtiens une précision d'environ 71.89%
+Avec 1024 neurones sur la première couche cachée, j'obtiens une précision d'environ 72.06%
+Avec 1024 neurones sur la deuxième couche cachée, j'obtiens une précision d'environ 70.82%
+Avec 1024 neurones sur les deux couches cachées, j'obtiens une précision d'environ 72.37%
+
+Avec une seule couche cachée de 256 neuronnes, j'obtiens une précision d'environ 73.56%
+Avec une seule couche cachée de 512 neuronnes, j'obtiens une précision d'environ 73.50%
+Avec une seule couche cachée de 1024 neuronnes, j'obtiens une précision d'environ 73.67%
+Avec une seule couche cachée de 2048 neuronnes, j'obtiens une précision d'environ 73.08%
+
+Avec trois couches cachée de 512 neuronnes, j'obtiens une précision d'environ 67.80%
+Avec 1024 neurones sur la première couche cachée, j'obtiens une précision d'environ 62.93%
+Avec 1024 neurones sur la deuxième couche cachée, j'obtiens une précision d'environ 67.83%
+Avec 1024 neurones sur la troisième couche cachée, j'obtiens une précision d'environ 67.32%
+Avec 1024 neurones sur la première et deuxième couches cachées, j'obtiens une précision d'environ 67.24%
+Avec 1024 neurones sur la première et troisième couches cachées, j'obtiens une précision d'environ 64.11%
+Avec 1024 neurones sur la deuxième et troisième couches cachées, j'obtiens une précision d'environ 70.34%
+Avec 1024 neurones sur les trois couches cachées, j'obtiens une précision d'environ 70.31%
+
+Avec 256 neurones sur la première couche cachée, j'obtiens une précision d'environ 66.82%
+Avec 256 neurones sur la deuxième couche cachée, j'obtiens une précision d'environ 69.55%
+Avec 256 neurones sur la troisième couche cachée, j'obtiens une précision d'environ 68.90%
+Avec 256 neurones sur la première et deuxième couches cachées, j'obtiens une précision d'environ 68.93%
+Avec 256 neurones sur la première et troisième couches cachées, j'obtiens une précision d'environ 70.20%
+Avec 256 neurones sur la deuxième et troisième couches cachées, j'obtiens une précision d'environ 69.75%
+Avec 256 neurones sur les trois couches cachées, j'obtiens une précision d'environ 68.31%
+
+Parmis les combinaisons de couches et de nombre de neurones que j'ai entrainé, une seule couche cachée avec 1024 neurones semble donner les meilleurs résultats.
+
+## Matrice de confusion pour le modèle avec les meilleurs résultats
+
+Matrice de confusion pour un modèle avec une couche cachée de 1024 neuronnes:
 
 
+<table>
+
+        <thead>
+        
+                <tr>
+                
+                        <td> </td>
+                        <th colspan="3"> Classes réelles </th>
+
+                </tr>
+
+        </thead>
+
+        <tr>
+
+                <th rowspaw="3"> Classes prédites </th>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+        </tr>
+
+        <tr>
+
+                <td> </td>
+                <td> </td>
+                <td> </td>
+
+        </tr>
+
+        <tr>
+        
+                <td> </td>
+                <td> </td>
+                <td> </td>
+
+        </tr>
+
+</table>
 
 <div style="page-break-after: always;"></div>
 
