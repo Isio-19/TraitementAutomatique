@@ -125,7 +125,7 @@ Précisions des modèles avec 3 couches cachées:
 
 <table>
     <tr>
-        <td> Couche cachée n°1 </td><td> Couche cachée n°2 </td>><td> Couche cachée n°3 </td><td> Précision </td>
+        <td> Couche cachée n°1 </td><td> Couche cachée n°2 </td><td> Couche cachée n°3 </td><td> Précision </td>
     </tr>
     <tr>
         <td> 512 </td><td> 512 </td><td> 512 </td><td> 67.80% </td>
@@ -277,7 +277,6 @@ hello -0.889455 -2.309539 -0.041192 -0.281227 0.395468 0.979277 1.356267 0.31051
 ## 5 - Proximité sémantique des mots
 Mots proches pour le mot 'best':
 >                                              Word       Cosine distance
->------------------------------------------------------------------------
 >                                            finest              0.452976
 >                                          greatest              0.392346
 >                                            fondly              0.385922
@@ -312,7 +311,6 @@ Mots proches pour le mot 'best':
 
 Mots proches pour le mot 'football':
 >                                              Word       Cosine distance
->------------------------------------------------------------------------
 >                                            soccer              0.570894
 >                                        basketball              0.536019
 >                                            hockey              0.508449
@@ -351,7 +349,6 @@ Mots proches pour le mot 'football':
 
 Mots proches pour le mot 'france':
 >                                              Word       Cosine distance
->------------------------------------------------------------------------
 >                                            french              0.569738
 >                                             spain              0.525488
 >                                          provence              0.514005
@@ -390,7 +387,6 @@ Mots proches pour le mot 'france':
 
 Mots proches pour le mot 'wine':
 >                                              Word       Cosine distance
->------------------------------------------------------------------------
 >                                             wines              0.510830
 >                                             grape              0.484084
 >                                             bread              0.483873
@@ -429,7 +425,6 @@ Mots proches pour le mot 'wine':
 
 Mots proches pour le mot 'apple':
 >                                              Word       Cosine distance
->------------------------------------------------------------------------
 >                                         macintosh              0.567289
 >                                              imac              0.478190
 >                                         quickdraw              0.462036
@@ -468,7 +463,6 @@ Mots proches pour le mot 'apple':
 
 Mots proches pour le mot 'mouse':
 >                                              Word       Cosine distance
->------------------------------------------------------------------------
 >                                              mice              0.463279
 >                                          joystick              0.445589
 >                                         trackball              0.422122
@@ -507,7 +501,6 @@ Mots proches pour le mot 'mouse':
 
 Mots proches pour le mot 'macron':
 >                                              Word       Cosine distance
->------------------------------------------------------------------------
 >                                         diacritic              0.601186
 >                                        circumflex              0.597843
 >                                        diacritics              0.550871
@@ -556,7 +549,6 @@ Par exemple:
 
 Analogie pour les mots 'man woman king':
 >                                              Word              Distance
->------------------------------------------------------------------------
 >                                             queen              0.448882
 >                                         betrothed              0.419719
 >                                          daughter              0.414255
@@ -593,7 +585,6 @@ Cette analogie marche.
 
 Analogie pour les mots 'athens greece paris':
 >                                              Word              Distance
->------------------------------------------------------------------------
 >                                            france              0.465426
 >                                             seine              0.378663
 >                                              vres              0.377249
@@ -632,7 +623,6 @@ Cette analogie marche.
 
 Analogie pour les mots 'berlin germany madrid':
 >                                              Word              Distance
->------------------------------------------------------------------------
 >                                             spain              0.485459
 >                                             italy              0.379350
 >                                            france              0.375143
@@ -671,7 +661,6 @@ Cette analogie marche.
 
 Analogie pour les mots 'man woman son': 
 >                                              Word              Distance
->------------------------------------------------------------------------
 >                                          daughter              0.608468
 >                                              wife              0.488741
 >                                            mother              0.465415
@@ -710,7 +699,6 @@ Cette analogie marche.
 
 Analogie pour les mots 'write writes descrease':
 >                                              Word              Distance
->------------------------------------------------------------------------
 >                                         increases              0.426667
 >                                          increase              0.365341
 >                                         decreases              0.350800
@@ -749,7 +737,6 @@ Non, cela ne marche pas, nous obtenons "increases" et "increase" avec le mot "de
 
 Analogie pour les mots 'man woman husband':
 >                                              Word              Distance
->------------------------------------------------------------------------
 >                                          daughter              0.434027
 >                                              wife              0.427856
 >                                               her              0.426929
@@ -788,7 +775,6 @@ Non, cela ne marche pas. Nous obtenons le mot "daughter" avant le mot "wife"
 
 Analogie pour les mots 'us italy hamburger':
 >                                              Word              Distance
->------------------------------------------------------------------------
 >                                          cagliari              0.455069
 >                                          lombardy              0.432284
 >                                            padova              0.426529
@@ -826,7 +812,6 @@ Non, cela ne marche pas. Le mot "bologna" n'apparait pas dans les mots proches d
 
 Analogie pour les mots 'us australia hamburger': 
 >                                              Word              Distance
->------------------------------------------------------------------------
 >                                          tasmania              0.395597
 >                                            sydney              0.366852
 >                                          desserts              0.347704
