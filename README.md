@@ -108,21 +108,21 @@ Parmis les combinaisons de couches et de nombre de neurones que j'ai entrainé, 
 
 Matrice de confusion pour un modèle avec une couche cachée de 1024 neuronnes:
 
-|                  | Classes réelles | <               | <             | <             | <     |
-| Classes prédites /                 /   Neutre ( 0 )  / Positif ( 1 ) / Négatif ( 2 ) / Total |
-| ^                |   Neutre ( 0 )  /                 |               |               |       |
-| ^                |  Positif ( 1 )  /                 |               |               |       |
-| ^                |  Négatif ( 2 )  /                 |               |               |       |
-| ^                |      Total      /                 |               |               |       |
-|------------------/-----------------/-----------------/---------------/---------------/-------|
+|                  | Classes réelles | <               | <             | <             | <              |
+| Classes prédites /                 /   Neutre ( 0 )  / Positif ( 1 ) / Négatif ( 2 ) / Total          |
+| ^                |   Neutre ( 0 )  / 1425            | 304           | 363           | 2092 (58.98%)  |
+| ^                |  Positif ( 1 )  / 88              | 1171          | 196           | 1455 (41.02%)  |
+| ^                |  Négatif ( 2 )  / 0               | 0             | 0             | 0    (0.00%)   |
+| ^                |      Total      / 1513 (42.66%)   | 1475 (41.58%) | 559 (15.76%)  | 3547 (100.00%) |
+|------------------/-----------------/-----------------/---------------/---------------/----------------|
 
 <table>
     <tr>
         <td></td>
-        <td colspan = "5">Classes réelles</td>
+        <td colspan="5" style="text-align: center;">Classes réelles</td>
     </tr>
     <tr>
-        <td rowspan = "5">Classes prédites</td>
+        <td rowspan="5">Classes prédites</td>
         <td></td>
         <td>Neutre (0)</td>
         <td>Positif (1)</td>
@@ -131,31 +131,31 @@ Matrice de confusion pour un modèle avec une couche cachée de 1024 neuronnes:
     </tr>
     <tr>
         <td>Neutre (0)</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td> 1425 </td>
+        <td> 304 </td>
+        <td> 363 </td>
+        <td> 2092 (58.98%) </td>
     </tr>
     <tr>
         <td>Positif (1)</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td> 88 </td>
+        <td> 1171 </td>
+        <td> 196 </td>
+        <td> 1455 (41.02%) </td>
     </tr>
     <tr>
         <td>Négatif (2)</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td> 0 </td>
+        <td> 0 </td>
+        <td> 0 </td>
+        <td> 0 (0.00%) </td>
     </tr>
     <tr>
         <td>Total</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td> 1513 (42.66%) </td>
+        <td> 1475 (41.58%) </td>
+        <td> 559 (15.76%) </td>
+        <td> 3547 (100.00%)</td>
     </tr>
 </table>
 

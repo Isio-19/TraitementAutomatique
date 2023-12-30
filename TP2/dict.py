@@ -6,11 +6,9 @@ device = ("cuda")
 class NeuralNetwork(torch.nn.Module):
     def __init__(self, dictSize):
         super(NeuralNetwork, self).__init__()
-        self.linear1 = torch.nn.Linear(dictSize, 256)
+        self.linear1 = torch.nn.Linear(dictSize, 1024)
         self.relu1 = torch.nn.ReLU()
-        self.linear2 = torch.nn.Linear(256, 256)
-        self.relu2 = torch.nn.ReLU()
-        self.linear3 = torch.nn.Linear(256, 3)
+        self.linear2 = torch.nn.Linear(1024, 3)
         self.softmax = torch.nn.Softmax(dim=1)
         self.double()
 
@@ -18,8 +16,6 @@ class NeuralNetwork(torch.nn.Module):
         x = self.linear1(x)
         x = self.relu1(x)
         x = self.linear2(x)
-        x = self.relu2(x)
-        x = self.linear3(x)
         x = self.softmax(x)
 
         return x
@@ -79,6 +75,8 @@ def test_model(dataloader, model):
     errorRate = 0
     numberLine = 0
 
+    confusionMatrix = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+
     for batch, (X, y) in enumerate(dataloader):
         predictedY = model(X)
 
@@ -86,14 +84,16 @@ def test_model(dataloader, model):
             numberLine += 1
 
             predictedLabel = numpy.argmax(predictedY[i].tolist())
+
+            confusionMatrix[predictedLabel][y[i]] += 1
+
             if predictedLabel != y[i]:
                 errorRate += 1
 
     precision = 100 - (errorRate/numberLine)*100
 
     print(f'Prediction rate of the model: {precision}%')
-    return precision
-
+    return confusionMatrix
 
 def loadStopWords():
     file = open("donnees_tp2/stopwords.txt", "r", encoding="utf-8")
@@ -247,10 +247,14 @@ model = NeuralNetwork(len(wordDict)).to(device)
 loss_fn = torch.nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
 
+confusionMatrix = []
+
 for i in range(5):
     train_loop(dataloader, model, loss_fn, optimizer)
 
     svm = SVMDataset("svm/test.svm", len(wordDict))
     dataloader = torch.utils.data.DataLoader(svm, batch_size=4)
 
-    test_model(dataloader, model)
+    confusionMatrix = test_model(dataloader, model)
+
+print(f"Confusion matrix: {confusionMatrix}")
